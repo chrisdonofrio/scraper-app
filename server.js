@@ -11,6 +11,17 @@ var PORT = process.env.PORT || 7500;
 
 var app = express();
 
+// config database
+mongoose.connect('mongodb://localhost/scraperApp');
+var db = mongoose.connection;
+
+db.on('error', function(err) {
+  console.log('Mongoose Error: ', err);
+});
+db.once('open', function() {
+  console.log('Mongoose connection successful.');
+});
+
 // set up logger
 app.use(logger("dev"));
 app.use(bodyparser.urlencoded({
