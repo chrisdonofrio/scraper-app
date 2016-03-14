@@ -68,6 +68,15 @@ app.get("/", function(req, res) {
   });
 });
 
+app.get('/showArticles', function(req, res) {
+  Article.find({}, function(err, articleData) {
+    if(err) {
+      throw err;
+    }
+    res.json(articleData);
+  }).limit(5);
+});
+
 // listen on port
 app.listen(PORT, function() {
   console.log("App running on port %s", PORT);
